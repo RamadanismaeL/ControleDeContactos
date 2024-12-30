@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "dgSpecHash": "XMndB/in6yCFzXyP3Z44piFOx2SRpL5giHpFpuKU8aZDJpt4QtrGuVs3KA093IdVkWA+I4ccA/2CbjDxjojWSQ==",
+  "success": true,
+  "projectFilePath": "/home/ramadan/Documents/Projects/ControleDeContactos/controleDeContactos/controleDeContactos.csproj",
+  "expectedPackageFiles": [
+    "/home/ramadan/.nuget/packages/microsoft.aspnetcore.openapi/8.0.11/microsoft.aspnetcore.openapi.8.0.11.nupkg.sha512",
+    "/home/ramadan/.nuget/packages/microsoft.extensions.apidescription.server/6.0.5/microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
+    "/home/ramadan/.nuget/packages/microsoft.openapi/1.6.14/microsoft.openapi.1.6.14.nupkg.sha512",
+    "/home/ramadan/.nuget/packages/swashbuckle.aspnetcore/6.6.2/swashbuckle.aspnetcore.6.6.2.nupkg.sha512",
+    "/home/ramadan/.nuget/packages/swashbuckle.aspnetcore.swagger/6.6.2/swashbuckle.aspnetcore.swagger.6.6.2.nupkg.sha512",
+    "/home/ramadan/.nuget/packages/swashbuckle.aspnetcore.swaggergen/6.6.2/swashbuckle.aspnetcore.swaggergen.6.6.2.nupkg.sha512",
+    "/home/ramadan/.nuget/packages/swashbuckle.aspnetcore.swaggerui/6.6.2/swashbuckle.aspnetcore.swaggerui.6.6.2.nupkg.sha512"
+  ],
+  "logs": []
+}
