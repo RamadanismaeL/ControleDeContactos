@@ -17,51 +17,51 @@ namespace controleDeContactos.Data.Maps
         {
             try
             {
-                builder.HasKey(u => u.GetId());
-                builder.Property(u => u.GetId())
+                builder.HasKey(u => u.Id);
+                builder.Property(u => u.Id)
                 .HasColumnName("id")
                 .HasColumnType("bigint unsigned")
                 .ValueGeneratedOnAdd()
                 .IsRequired();
 
-                builder.HasIndex(u => u.GetFirstName()).IsUnique();
-                builder.Property(u => u.GetFirstName())
-                .HasColumnName("firstName")
+                builder.HasIndex(u => u.FullName).IsUnique();
+                builder.Property(u => u.FullName)
+                .HasColumnName("fullName")
                 .HasColumnType("varchar(45)")
                 .HasMaxLength(45)
                 .IsRequired();
 
-                builder.HasIndex(u => u.GetEmail()).IsUnique();
-                builder.Property(u => u.GetEmail())
+                builder.HasIndex(u => u.Email).IsUnique();
+                builder.Property(u => u.Email)
                 .HasColumnName("email")
                 .HasColumnType("varchar(45)")
                 .HasMaxLength(45)
                 .IsRequired();
 
-                builder.HasIndex(u => u.GetUserName()).IsUnique();
-                builder.Property(u => u.GetUserName())
+                builder.HasIndex(u => u.UserName).IsUnique();
+                builder.Property(u => u.UserName)
                 .HasColumnName("userName")
                 .HasColumnType("varchar(30)")
                 .HasMaxLength(30)
                 .IsRequired();
 
-                builder.Property(u => u.GetPassword())
+                builder.Property(u => u.Password)
                 .HasColumnName("password")
                 .HasColumnType("varchar(75)")
                 .HasMaxLength(75)
                 .IsRequired();
 
-                builder.Property<UserProfileEnum>(u => u.GetProfile())
+                builder.Property<UserProfileEnum>(u => u.Profile)
                 .HasColumnName("profile")
                 .HasDefaultValue(UserProfileEnum.Pattern)
                 .IsRequired();
 
-                builder.Property<UserStatusEnum>(u => u.GetStatus())
+                builder.Property<UserStatusEnum>(u => u.Status)
                 .HasColumnName("status")
                 .HasDefaultValue(UserStatusEnum.Inactive)
                 .IsRequired();
 
-                builder.Property<DateTime>(u => u.GetDateRegister())
+                builder.Property<DateTime>(u => u.DateRegister)
                 .HasColumnName("dateRegister")
                 .HasColumnType("datetime")
                 .HasDefaultValueSql("current_timestamp")
