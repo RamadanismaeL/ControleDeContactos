@@ -1,5 +1,7 @@
 using System.ComponentModel;
-
+/**
+** @author Ramadan Ismael
+*/
 namespace controleDeContactos.Enums
 {
     public enum UserProfileEnum
@@ -7,6 +9,6 @@ namespace controleDeContactos.Enums
         [Description("Administrator User")]
         Admin = 1,
         [Description("Pattern User")]
-        Pattern = 2
+        Pattern = 0
     }
 }

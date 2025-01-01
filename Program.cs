@@ -4,7 +4,9 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-
+/**
+** @author Ramadan Ismael
+*/
 string keyRam = "2a01df3ae34b5032b7c6ea2e4211e1d8c49effbae7825d76184481658713c16fbae20799648b3f81b2b872e1702ea73b18b5b462fd8d74df21b21e5b50098a55";
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
