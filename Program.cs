@@ -1,5 +1,7 @@
 using System.Text;
+using controleDeContactos.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
@@ -52,6 +54,14 @@ builder.Services.AddAuthentication(ram => { ram.DefaultAuthenticateScheme = JwtB
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(keyRam))
     };
 });
+
+var username = Environment.GetEnvironmentVariable("DB_USER");
+var password = Environment.GetEnvironmentVariable("DB_PASSWORD");
+var port = Environment.GetEnvironmentVariable("DB_PORT");
+var server = Environment.GetEnvironmentVariable("DB_SERVER");
+Console.WriteLine($"User: {username}, Password: {password}, Port: {port}");
+string? connect = $"server={server}; port={port}; database=dbTaskContact; user={username}; password={password}; Persist Security Info=false; Connect Timeout=300";
+builder.Services.AddDbContextPool<dbTaskContact>(ram => ram.UseMySql(connect, ServerVersion.AutoDetect(connect)));
 
 var app = builder.Build();
 // Configure the HTTP request pipeline.
