@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace controleDeContactos.Migrations
 {
     /// <inheritdoc />
-    public partial class ConfigUserTable : Migration
+    public partial class tb_user : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

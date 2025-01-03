@@ -12,8 +12,8 @@ using controleDeContactos.Data;
 namespace controleDeContactos.Migrations
 {
     [DbContext(typeof(dbTaskContact))]
-    [Migration("20250101102137_ConfigUserTable")]
-    partial class ConfigUserTable
+    [Migration("20250103080803_tb_user")]
+    partial class tb_user
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

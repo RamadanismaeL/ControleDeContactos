@@ -14,7 +14,7 @@ namespace controleDeContactos.Data
     {
         public dbTaskContact(DbContextOptions<dbTaskContact> options) : base(options)
         {}
-        private DbSet<UserModel>? _users;
+        public required DbSet<UserModel> User { get; set; }
 
         protected override void OnModelCreating(ModelBuilder model)
         {
@@ -25,8 +25,5 @@ namespace controleDeContactos.Data
             }
             catch (Exception error) { throw new Exception($"Error : {error.Message}"); }
         }
-
-        public DbSet<UserModel>? getUsers() => this._users;
-        public void setUsers(DbSet<UserModel> users) => this._users = users;
     }
 }
