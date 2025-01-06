@@ -12,8 +12,8 @@ using controleDeContactos.Data;
 namespace controleDeContactos.Migrations
 {
     [DbContext(typeof(dbTaskContact))]
-    [Migration("20250103080803_tb_user")]
-    partial class tb_user
+    [Migration("20250103095206_tb_user_updated")]
+    partial class tb_user_updated
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -39,6 +39,9 @@ namespace controleDeContactos.Migrations
                         .HasColumnType("datetime")
                         .HasColumnName("dateRegister")
                         .HasDefaultValueSql("current_timestamp");
+
+                    b.Property<DateTime>("DateUpdate")
+                        .HasColumnType("datetime");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -87,7 +90,7 @@ namespace controleDeContactos.Migrations
                     b.HasIndex("UserName")
                         .IsUnique();
 
-                    b.ToTable("UserModel");
+                    b.ToTable("tbUser", (string)null);
                 });
 #pragma warning restore 612, 618
         }

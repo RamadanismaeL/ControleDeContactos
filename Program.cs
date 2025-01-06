@@ -1,6 +1,9 @@
 using System.Text;
 using controleDeContactos.Data;
+using controleDeContactos.src.Services.Interfaces;
+using controleDeContactos.src.Services.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -56,6 +59,7 @@ builder.Services.AddAuthentication(ram => { ram.DefaultAuthenticateScheme = JwtB
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(keyRam))
     };
 });
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 var username = Environment.GetEnvironmentVariable("DB_USER");
 var password = Environment.GetEnvironmentVariable("DB_PASSWORD");
@@ -67,13 +71,15 @@ builder.Services.AddDbContextPool<dbTaskContact>(ram => ram.UseMySql(connect, Se
 
 var app = builder.Build();
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.UseAuthentication();
 app.MapControllers();
 app.Run();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}

@@ -14,7 +14,7 @@ namespace controleDeContactos.Data
     {
         public dbTaskContact(DbContextOptions<dbTaskContact> options) : base(options)
         {}
-        public required DbSet<UserModel> User { get; set; }
+        public required DbSet<UserModel> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder model)
         {

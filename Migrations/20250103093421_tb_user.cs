@@ -16,7 +16,7 @@ namespace controleDeContactos.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "UserModel",
+                name: "tbUser",
                 columns: table => new
                 {
                     id = table.Column<ulong>(type: "bigint unsigned", nullable: false)
@@ -35,25 +35,25 @@ namespace controleDeContactos.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserModel", x => x.id);
+                    table.PrimaryKey("PK_tbUser", x => x.id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserModel_email",
-                table: "UserModel",
+                name: "IX_tbUser_email",
+                table: "tbUser",
                 column: "email",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserModel_fullName",
-                table: "UserModel",
+                name: "IX_tbUser_fullName",
+                table: "tbUser",
                 column: "fullName",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserModel_userName",
-                table: "UserModel",
+                name: "IX_tbUser_userName",
+                table: "tbUser",
                 column: "userName",
                 unique: true);
         }
@@ -62,7 +62,7 @@ namespace controleDeContactos.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "UserModel");
+                name: "tbUser");
         }
     }
 }

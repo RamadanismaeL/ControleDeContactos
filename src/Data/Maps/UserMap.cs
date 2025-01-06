@@ -17,6 +17,7 @@ namespace controleDeContactos.Data.Maps
         {
             try
             {
+                builder.ToTable("tbUser");
                 builder.HasKey(u => u.Id);
                 builder.Property(u => u.Id)
                 .HasColumnName("id")
@@ -66,6 +67,10 @@ namespace controleDeContactos.Data.Maps
                 .HasColumnType("datetime")
                 .HasDefaultValueSql("current_timestamp")
                 .IsRequired();
+
+                builder.Property<DateTime>(u => u.DateUpdate)
+                .HasColumnType("dateUpdate")
+                .HasColumnType("datetime");
             }
             catch (Exception error)
             {
