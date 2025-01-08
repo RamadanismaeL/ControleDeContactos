@@ -20,7 +20,7 @@ builder.Services.AddSwaggerGen(ram => {
     ram.SwaggerDoc("v1", new OpenApiInfo {
         Title = "Contact and Task Management System.",
         Version = "v1",
-        Description = "API for managing contacts and tasks with JWT authentication",
+        Description = "API for management contacts and tasks with JWT authentication",
         Contact = new OpenApiContact
         {
             Name = "Administrator : Ramadan Ibraimo Ismael",
@@ -47,7 +47,10 @@ builder.Services.AddSwaggerGen(ram => {
         { securitySchema, new[] {"Bearer"} }
     });
 });
-builder.Services.AddAuthentication(ram => { ram.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme; }).AddJwtBearer(ram => {
+builder.Services.AddAuthentication(ram => {
+    ram.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    ram.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    }).AddJwtBearer(ram => {
     ram.TokenValidationParameters = new TokenValidationParameters()
     {
         ValidateIssuer = true,
@@ -56,30 +59,32 @@ builder.Services.AddAuthentication(ram => { ram.DefaultAuthenticateScheme = JwtB
         ValidateIssuerSigningKey = true,
         ValidIssuer = "IsmaelBusinessSolution",
         ValidAudience = "ContactAndTaskManagementSystem",
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(keyRam))
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(keyRam)),
+        ClockSkew = TimeSpan.Zero
     };
 });
+builder.Services.AddAuthorization();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 
-var username = Environment.GetEnvironmentVariable("DB_USER");
-var password = Environment.GetEnvironmentVariable("DB_PASSWORD");
-var port = Environment.GetEnvironmentVariable("DB_PORT");
-var server = Environment.GetEnvironmentVariable("DB_SERVER");
+var username = Environment.GetEnvironmentVariable("DB_USER") ?? throw new InvalidOperationException("DB_USER is not set");
+var password = Environment.GetEnvironmentVariable("DB_PASSWORD") ?? throw new InvalidOperationException("DB_PASSWORD is not set");
+var port = Environment.GetEnvironmentVariable("DB_PORT") ?? throw new InvalidOperationException("DB_PORT is not set");
+var server = Environment.GetEnvironmentVariable("DB_SERVER") ?? throw new InvalidOperationException("DB_SERVER is not set");
+
 //Console.WriteLine($"User: {username}, Password: {password}, Port: {port}");
 string? connect = $"server={server}; port={port}; database=dbTaskContact; user={username}; password={password}; Persist Security Info=false; Connect Timeout=300";
 builder.Services.AddDbContextPool<dbTaskContact>(ram => ram.UseMySql(connect, ServerVersion.AutoDetect(connect)));
 
 var app = builder.Build();
 // Configure the HTTP request pipeline.
-
-app.UseHttpsRedirection();
-app.UseAuthorization();
-app.UseAuthentication();
-app.MapControllers();
-app.Run();
-
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseHttpsRedirection();
+app.UseAuthentication();
+app.UseAuthorization();
+app.MapControllers();
+app.Run();
