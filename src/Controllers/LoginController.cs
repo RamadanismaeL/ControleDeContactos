@@ -45,7 +45,9 @@ namespace controleDeContactos.src.Controllers
                 audience: "ContactAndTaskManagementSystem",
                 claims: claims,
                 notBefore: DateTime.UtcNow,
-                expires: DateTime.UtcNow.AddSeconds(30),
+                //expires: DateTime.UtcNow.AddSeconds(30),
+                //expires: DateTime.UtcNow.AddMinutes(2),
+                expires: DateTime.UtcNow.AddHours(1),
                 signingCredentials: credential
             );
             return new JwtSecurityTokenHandler().WriteToken(token);

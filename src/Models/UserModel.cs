@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using controleDeContactos.Enums;
 using controleDeContactos.src.config;
+using controleDeContactos.src.Models;
 /**
 ** @author Ramadan Ismael
 */
@@ -21,6 +22,7 @@ namespace controleDeContactos.Models
         public UserStatusEnum Status { get; set; }
         public DateTime DateRegister { get; set; }
         public DateTime DateUpdate { get; set; }
+        public virtual List<ContactModel>? Contacts { get; set; }
 
         public bool VerifyPassword(string password) { return BCrypt.Net.BCrypt.Verify(password, Password); }
 
