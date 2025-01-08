@@ -60,7 +60,7 @@ namespace controleDeContactos.Migrations
                         .HasColumnType("int")
                         .HasColumnName("phoneNumber");
 
-                    b.Property<ulong>("UserID")
+                    b.Property<ulong?>("UserID")
                         .HasColumnType("bigint unsigned")
                         .HasColumnName("userID");
 
@@ -148,17 +148,10 @@ namespace controleDeContactos.Migrations
             modelBuilder.Entity("controleDeContactos.src.Models.ContactModel", b =>
                 {
                     b.HasOne("controleDeContactos.src.Models.UserModel", "User")
-                        .WithMany("Contacts")
-                        .HasForeignKey("UserID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany()
+                        .HasForeignKey("UserID");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("controleDeContactos.src.Models.UserModel", b =>
-                {
-                    b.Navigation("Contacts");
                 });
 #pragma warning restore 612, 618
         }

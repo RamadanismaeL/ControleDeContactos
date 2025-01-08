@@ -22,7 +22,7 @@ namespace controleDeContactos.src.Services.Repositories
             return contactModel;
         }
 
-        public async Task<List<ContactModel>> ReadAll() { return await _dbTaskContact.Contacts.ToListAsync(); }
+        public async Task<List<ContactModel>> ReadAll() { return await _dbTaskContact.Contacts.Include(c => c.User).ToListAsync(); }
 
         public async Task<ContactModel> Update(ContactModel contactModel, int id)
         {
@@ -32,7 +32,8 @@ namespace controleDeContactos.src.Services.Repositories
             contactID.Email = contactModel.Email;
             contactID.PhoneNumber = contactModel.PhoneNumber;
             contactID.UserID = contactModel.UserID;
-            contactID.User = contactModel.User;
+            _dbTaskContact.Contacts.Update(contactID);
+            await _dbTaskContact.SaveChangesAsync();
             return contactID;
         }
 
@@ -44,8 +45,8 @@ namespace controleDeContactos.src.Services.Repositories
             return true;
         }
 
-        public async Task<ContactModel> FindByID(int id) { return await _dbTaskContact.Contacts.FirstOrDefaultAsync(c => c.Id == id) ?? throw new KeyNotFoundException($"{id} is not registered."); }
+        public async Task<ContactModel> FindByID(int id) { return await _dbTaskContact.Contacts.Include(c => c.User).FirstOrDefaultAsync(c => c.Id == id) ?? throw new KeyNotFoundException($"{id} is not registered."); }
 
-        public async Task<List<ContactModel>> FindByName(string name) { return await _dbTaskContact.Contacts.Where(c => c.Name == name).ToListAsync() ?? throw new InvalidOperationException($"{name} not registered."); }
+        public async Task<List<ContactModel>> FindByName(string name) { return await _dbTaskContact.Contacts.Where(c => c.Name == name).Include(c => c.User).ToListAsync() ?? throw new InvalidOperationException($"{name} not registered."); }
     }
 }

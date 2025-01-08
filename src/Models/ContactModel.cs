@@ -17,7 +17,7 @@ namespace controleDeContactos.src.Models
         public string? Email { get; set; }
         public int PhoneNumber { get; set; }
         public DateTime DateRegister { get; set; }
-        public int UserID { get; set; }
-        public UserModel? User { get; set; }
+        public int? UserID { get; set; }
+        public virtual UserModel? User { get; set; }
     }
 }

@@ -16,19 +16,19 @@ namespace controleDeContactos.src.Data.Maps
             {
                 builder.ToTable("tbContact");
 
-                builder.HasKey(c => c.Id);
                 builder.Property(c => c.Id)
                 .HasColumnName("id")
                 .HasColumnType("bigint unsigned")
                 .ValueGeneratedOnAdd()
                 .IsRequired();
+                builder.HasKey(c => c.Id);
 
-                builder.HasIndex(c => c.Name).IsUnique();
                 builder.Property(c => c.Name)
                 .HasColumnName("name")
                 .HasColumnType("varchar(45)")
                 .HasMaxLength(45)
                 .IsRequired();
+                builder.HasIndex(c => c.Name).IsUnique();
 
                 builder.Property(c => c.LastName)
                 .HasColumnName("lastName")
@@ -36,12 +36,12 @@ namespace controleDeContactos.src.Data.Maps
                 .HasMaxLength(30)
                 .IsRequired();
 
-                builder.HasIndex(c => c.Email).IsUnique();
                 builder.Property(c => c.Email)
                 .HasColumnName("email")
                 .HasColumnType("varchar(45)")
                 .HasMaxLength(45)
                 .IsRequired();
+                builder.HasIndex(c => c.Email).IsUnique();
 
                 builder.Property(c => c.PhoneNumber)
                 .HasColumnName("phoneNumber")
@@ -54,11 +54,10 @@ namespace controleDeContactos.src.Data.Maps
                 .HasDefaultValueSql("current_timestamp")
                 .IsRequired();
 
-                builder.HasOne(c => c.User);
                 builder.Property(c => c.UserID)
                 .HasColumnName("userID")
-                .HasColumnType("bigint unsigned")
-                .IsRequired();
+                .HasColumnType("bigint unsigned");
+                builder.HasOne(c => c.User);
             }
             catch (Exception error)
             {

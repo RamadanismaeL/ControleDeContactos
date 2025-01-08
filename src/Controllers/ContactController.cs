@@ -43,9 +43,11 @@ namespace controleDeContactos.src.Controllers
         {
             try
             {
-                List<ContactModel> _list = await _contactRepository.ReadAll();
+                /*List<ContactModel> _list = await _contactRepository.ReadAll();
                 if(_list == null || !_list.Any()) return NotFound("Empty list");
-                return Ok(_list);
+                return Ok(_list);*/
+                var contacts = await _contactRepository.ReadAll();
+                return Ok(contacts);
             }
             catch(Exception error)
             {
@@ -63,8 +65,8 @@ namespace controleDeContactos.src.Controllers
                 var existContact = await _contactRepository.FindByID(id);
                 if(existContact == null) return NotFound($"Contact with ID {id} not found.");
                 contactModel.Id = id;
-                ContactModel _contactModel = await _contactRepository.Update(contactModel, id);
-                return Ok(_contactModel);
+                ContactModel _contact = await _contactRepository.Update(contactModel, id);
+                return Ok(_contact);
             }
             catch(Exception error)
             {

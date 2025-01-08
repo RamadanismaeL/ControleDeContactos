@@ -18,33 +18,34 @@ namespace controleDeContactos.Data.Maps
             try
             {
                 builder.ToTable("tbUser");
-                builder.HasKey(u => u.Id);
+
                 builder.Property(u => u.Id)
                 .HasColumnName("id")
                 .HasColumnType("bigint unsigned")
                 .ValueGeneratedOnAdd()
                 .IsRequired();
+                builder.HasKey(u => u.Id);
 
-                builder.HasIndex(u => u.FullName).IsUnique();
                 builder.Property(u => u.FullName)
                 .HasColumnName("fullName")
                 .HasColumnType("varchar(45)")
                 .HasMaxLength(45)
                 .IsRequired();
+                builder.HasIndex(u => u.FullName).IsUnique();
 
-                builder.HasIndex(u => u.Email).IsUnique();
                 builder.Property(u => u.Email)
                 .HasColumnName("email")
                 .HasColumnType("varchar(45)")
                 .HasMaxLength(45)
                 .IsRequired();
+                builder.HasIndex(u => u.Email).IsUnique();
 
-                builder.HasIndex(u => u.UserName).IsUnique();
                 builder.Property(u => u.UserName)
                 .HasColumnName("userName")
                 .HasColumnType("varchar(30)")
                 .HasMaxLength(30)
                 .IsRequired();
+                builder.HasIndex(u => u.UserName).IsUnique();
 
                 builder.Property(u => u.Password)
                 .HasColumnName("password")

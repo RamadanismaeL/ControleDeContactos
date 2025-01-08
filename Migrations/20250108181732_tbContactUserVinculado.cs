@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace controleDeContactos.Migrations
 {
     /// <inheritdoc />
-    public partial class add_tbUserandContact : Migration
+    public partial class tbContactUserVinculado : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -54,7 +54,7 @@ namespace controleDeContactos.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     phoneNumber = table.Column<int>(type: "int", maxLength: 9, nullable: false),
                     dateRegister = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "current_timestamp"),
-                    userID = table.Column<ulong>(type: "bigint unsigned", nullable: false)
+                    userID = table.Column<ulong>(type: "bigint unsigned", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -63,8 +63,7 @@ namespace controleDeContactos.Migrations
                         name: "FK_tbContact_tbUser_userID",
                         column: x => x.userID,
                         principalTable: "tbUser",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "id");
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
