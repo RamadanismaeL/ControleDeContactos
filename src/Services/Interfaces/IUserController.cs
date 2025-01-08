@@ -1,4 +1,4 @@
-using controleDeContactos.Models;
+using controleDeContactos.src.Models;
 using Microsoft.AspNetCore.Mvc;
 /**
 ** @author Ramadan IsmaeL

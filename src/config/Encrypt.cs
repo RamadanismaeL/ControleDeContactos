@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using controleDeContactos.Models;
+using controleDeContactos.src.Models;
 
 /**
 ** @author Ramadan Ismael

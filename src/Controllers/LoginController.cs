@@ -4,7 +4,6 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using controleDeContactos.Models;
 using controleDeContactos.src.Models;
 using controleDeContactos.src.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;

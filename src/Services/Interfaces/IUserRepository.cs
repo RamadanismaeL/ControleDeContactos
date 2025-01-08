@@ -1,4 +1,4 @@
-using controleDeContactos.Models;
+using controleDeContactos.src.Models;
 /**
 ** @author Ramadan Ismael
 */

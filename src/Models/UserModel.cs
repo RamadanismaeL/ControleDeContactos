@@ -1,15 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 using controleDeContactos.Enums;
 using controleDeContactos.src.config;
 using controleDeContactos.src.Models;
 /**
 ** @author Ramadan Ismael
 */
-namespace controleDeContactos.Models
+namespace controleDeContactos.src.Models
 {
     public class UserModel
     {

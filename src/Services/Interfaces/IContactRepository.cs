@@ -8,10 +8,10 @@ namespace controleDeContactos.src.Services.Interfaces
     public interface IContactRepository
     {
         Task<ContactModel> Create(ContactModel contactModel);
-        Task<List<ContactModel>> ReadALl();
+        Task<List<ContactModel>> ReadAll();
         Task<ContactModel> Update(ContactModel contactModel, int id);
         Task<bool> Delete(int id);
         Task<ContactModel> FindByID(int id);
-        Task<ContactModel> FintByName(string name);
+        Task<List<ContactModel>> FindByName(string name);
     }
 }

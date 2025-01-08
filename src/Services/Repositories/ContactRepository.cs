@@ -22,7 +22,7 @@ namespace controleDeContactos.src.Services.Repositories
             return contactModel;
         }
 
-        public async Task<List<ContactModel>> ReadALl() { return await _dbTaskContact.Contacts.ToListAsync(); }
+        public async Task<List<ContactModel>> ReadAll() { return await _dbTaskContact.Contacts.ToListAsync(); }
 
         public async Task<ContactModel> Update(ContactModel contactModel, int id)
         {
@@ -46,6 +46,6 @@ namespace controleDeContactos.src.Services.Repositories
 
         public async Task<ContactModel> FindByID(int id) { return await _dbTaskContact.Contacts.FirstOrDefaultAsync(c => c.Id == id) ?? throw new KeyNotFoundException($"{id} is not registered."); }
 
-        public async Task<ContactModel> FintByName(string name) { return await _dbTaskContact.Contacts.FirstOrDefaultAsync(c => c.Name == name) ?? throw new InvalidOperationException($"{name} not registered."); }
+        public async Task<List<ContactModel>> FindByName(string name) { return await _dbTaskContact.Contacts.Where(c => c.Name == name).ToListAsync() ?? throw new InvalidOperationException($"{name} not registered."); }
     }
 }

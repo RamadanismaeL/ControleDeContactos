@@ -22,7 +22,62 @@ namespace controleDeContactos.Migrations
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
-            modelBuilder.Entity("controleDeContactos.Models.UserModel", b =>
+            modelBuilder.Entity("controleDeContactos.src.Models.ContactModel", b =>
+                {
+                    b.Property<ulong>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint unsigned")
+                        .HasColumnName("id");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<ulong>("Id"));
+
+                    b.Property<DateTime>("DateRegister")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasColumnName("dateRegister")
+                        .HasDefaultValueSql("current_timestamp");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(45)
+                        .HasColumnType("varchar(45)")
+                        .HasColumnName("email");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("varchar(30)")
+                        .HasColumnName("lastName");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(45)
+                        .HasColumnType("varchar(45)")
+                        .HasColumnName("name");
+
+                    b.Property<int>("PhoneNumber")
+                        .HasMaxLength(9)
+                        .HasColumnType("int")
+                        .HasColumnName("phoneNumber");
+
+                    b.Property<ulong>("UserID")
+                        .HasColumnType("bigint unsigned")
+                        .HasColumnName("userID");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("tbContact", (string)null);
+                });
+
+            modelBuilder.Entity("controleDeContactos.src.Models.UserModel", b =>
                 {
                     b.Property<ulong>("Id")
                         .ValueGeneratedOnAdd()
@@ -92,62 +147,7 @@ namespace controleDeContactos.Migrations
 
             modelBuilder.Entity("controleDeContactos.src.Models.ContactModel", b =>
                 {
-                    b.Property<ulong>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint unsigned")
-                        .HasColumnName("id");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<ulong>("Id"));
-
-                    b.Property<DateTime>("DateRegister")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime")
-                        .HasColumnName("dateRegister")
-                        .HasDefaultValueSql("current_timestamp");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(45)
-                        .HasColumnType("varchar(45)")
-                        .HasColumnName("email");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("varchar(30)")
-                        .HasColumnName("lastName");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(45)
-                        .HasColumnType("varchar(45)")
-                        .HasColumnName("name");
-
-                    b.Property<int>("PhoneNumber")
-                        .HasMaxLength(9)
-                        .HasColumnType("int")
-                        .HasColumnName("phoneNumber");
-
-                    b.Property<ulong>("UserID")
-                        .HasColumnType("bigint unsigned")
-                        .HasColumnName("userID");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Email")
-                        .IsUnique();
-
-                    b.HasIndex("Name")
-                        .IsUnique();
-
-                    b.HasIndex("UserID");
-
-                    b.ToTable("tbContact", (string)null);
-                });
-
-            modelBuilder.Entity("controleDeContactos.src.Models.ContactModel", b =>
-                {
-                    b.HasOne("controleDeContactos.Models.UserModel", "User")
+                    b.HasOne("controleDeContactos.src.Models.UserModel", "User")
                         .WithMany("Contacts")
                         .HasForeignKey("UserID")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -156,7 +156,7 @@ namespace controleDeContactos.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("controleDeContactos.Models.UserModel", b =>
+            modelBuilder.Entity("controleDeContactos.src.Models.UserModel", b =>
                 {
                     b.Navigation("Contacts");
                 });

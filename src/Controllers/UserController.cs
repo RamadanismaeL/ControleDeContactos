@@ -1,4 +1,4 @@
-using controleDeContactos.Models;
+using controleDeContactos.src.Models;
 using controleDeContactos.src.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

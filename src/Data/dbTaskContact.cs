@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using controleDeContactos.Data.Maps;
-using controleDeContactos.Models;
-using controleDeContactos.src.Data.Maps;
 using controleDeContactos.src.Models;
+using controleDeContactos.src.Data.Maps;
 using Microsoft.EntityFrameworkCore;
 /**
 ** @author Ramadan Ismael
