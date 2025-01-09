@@ -11,7 +11,7 @@ namespace controleDeContactos.src.Services.Interfaces
     {
         Task<ActionResult<ContactModel>> Create([FromBody] ContactModel contactModel);
         Task<ActionResult<List<ContactModel>>> ReadAll();
-        Task<ActionResult<ContactModel>> Update([FromBody] ContactModel contactModel, int id1);
+        Task<ActionResult<ContactModel>> Update([FromBody] ContactModel contactModel, int id);
         Task<ActionResult<ContactModel>> Delete(int id);
         Task<ActionResult<ContactModel>> FintdByID(int id);
         Task<ActionResult<ContactModel>> FindByName(string name);

@@ -17,6 +17,7 @@ namespace controleDeContactos.Data
         {}
         public required DbSet<UserModel> Users { get; set; }
         public required DbSet<ContactModel> Contacts { get; set; }
+        public required DbSet<TaskModel> Tasks { get; set; }
 
         protected override void OnModelCreating(ModelBuilder model)
         {
@@ -24,6 +25,7 @@ namespace controleDeContactos.Data
             {
                 model.ApplyConfiguration(new UserMap());
                 model.ApplyConfiguration(new ContactMap());
+                model.ApplyConfiguration(new TaskMap());
                 base.OnModelCreating(model);
             }
             catch (Exception error) { throw new Exception($"Error : {error.Message}"); }
