@@ -1,7 +1,12 @@
 
 using controleDeContactos.Data;
+using controleDeContactos.src.Dtos;
+using controleDeContactos.src.Helpers;
+using controleDeContactos.src.Mappers;
 using controleDeContactos.src.Models;
 using controleDeContactos.src.Services.Interfaces;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration.UserSecrets;
 
@@ -48,5 +53,34 @@ namespace controleDeContactos.src.Services.Repositories
         public async Task<ContactModel> FindByID(int id) { return await _dbTaskContact.Contacts.Include(c => c.User).FirstOrDefaultAsync(c => c.Id == id) ?? throw new KeyNotFoundException($"{id} is not registered."); }
 
         public async Task<List<ContactModel>> FindByName(string name) { return await _dbTaskContact.Contacts.Where(c => c.Name == name).Include(c => c.User).ToListAsync() ?? throw new InvalidOperationException($"{name} not registered."); }
+
+        public async Task<object> ReadNLEP()
+        {
+            //return _dbTaskContact.Contacts.ToList().Select(c => c.ToContactDto());
+            var contacts = await _dbTaskContact.Contacts.ToListAsync();
+            var contactsDtos = contacts.Select(c => c.ToContactDto());
+            return contactsDtos;
+        }
+
+        public async Task<object> FilterNL(QueryObject queryObject)
+        {
+            var contacts = _dbTaskContact.Contacts.Include(c => c.User).AsQueryable();
+            if(!string.IsNullOrWhiteSpace(queryObject.Name))
+            {
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
+                contacts = contacts.Where(c => c.Name.Contains(queryObject.Name));
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
+            }
+            if(!string.IsNullOrWhiteSpace(queryObject.LastName))
+            {
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
+                contacts = contacts.Where(c => c.LastName.Contains(queryObject.LastName));
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
+            }
+
+            var take = await contacts.ToListAsync();
+            var contactsDtos = take.Select(c => c.ToContactDto());
+            return contactsDtos;
+        }
     }
 }

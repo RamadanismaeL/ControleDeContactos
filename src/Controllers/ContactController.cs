@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using controleDeContactos.src.Helpers;
 using controleDeContactos.src.Models;
 using controleDeContactos.src.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -123,6 +124,39 @@ namespace controleDeContactos.src.Controllers
             {
                 _logger.LogError(error, "An error occured!");
                 return StatusCode(410, "Error Message");
+            }
+        }
+
+        [Route("nelp")]
+        [HttpGet]
+        public async Task<ActionResult> ReadNLEP()
+        {
+            try
+            {
+                var contacts = await _contactRepository.ReadNLEP();
+                return Ok(contacts);
+            }
+            catch(Exception error)
+            {
+                _logger.LogError(error, "An error occured!");
+                return StatusCode(406, "Error Message");
+            }
+        }
+
+        [Route("filter")]
+        [HttpGet]
+        public async Task<ActionResult> FilterNL([FromQuery] QueryObject query)
+        {
+            try
+            {
+                if(!ModelState.IsValid) return BadRequest(ModelState);
+                var contacts = await _contactRepository.FilterNL(query);
+                return Ok(contacts);
+            }
+            catch(Exception error)
+            {
+                _logger.LogError(error, "An error occured!");
+                return StatusCode(406, "Error Message");
             }
         }
     }
