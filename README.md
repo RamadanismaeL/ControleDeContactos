@@ -1,2 +1,2 @@
 # Hello Friend!
-dotnet verion : 8.0
+dotnet version : 8.0
